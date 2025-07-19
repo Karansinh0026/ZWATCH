@@ -1,0 +1,15 @@
+{
+  "name": "zwatch",
+  "version": "1.0.0",
+  "description": "a video streaming website",
+  "keywords": [
+    "javascript"
+  ],
+  "license": "ISC",
+  "author": "karansinh sarvaiya",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

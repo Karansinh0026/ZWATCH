@@ -19,7 +19,7 @@ const userSchema=new mongoose.Schema({
         lowercase:true,
         trim:true,
     },
-    fullname:{
+    fullName:{
         type:String,
         required:true,
         trim:true,
@@ -47,10 +47,10 @@ const userSchema=new mongoose.Schema({
     }
 },{timestamps:true})
 
-userSchema.pre("save",function(next){ // .pre is used when before something is going to happen for example here is it save then before saving anything this middleware is used
+userSchema.pre("save",async function(next){ // .pre is used when before something is going to happen for example here is it save then before saving anything this middleware is used
     if(!this.isModified("password")) return next() // is modified method check if this datafeild is modified or not
     
-    this.password = bcrypt.hash(this.password,10) // this bcrypt.hash is used to encrypt the password and the int is salt round
+    this.password = await bcrypt.hash(this.password,10) // this bcrypt.hash is used to encrypt the password and the int is salt round
     next()
 })
 

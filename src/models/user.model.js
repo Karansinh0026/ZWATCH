@@ -47,7 +47,7 @@ const userSchema=new mongoose.Schema({
     }
 },{timestamps:true})
 
-userSchema.pre("save",function(next){
+userSchema.pre("save",function(next){ // .pre is used when before something is going to happen for example here is it save then before saving anything this middleware is used
     if(!this.isModified("password")) return next() // is modified method check if this datafeild is modified or not
     
     this.password = bcrypt.hash(this.password,10) // this bcrypt.hash is used to encrypt the password and the int is salt round
@@ -69,17 +69,14 @@ userSchema.methods.generateAccessToken = function(){
         process.env.ACCESS_TOKEN_SECRET,
         {
             expiresIn:process.env.ACCESS_TOKEN_EXPIRY
-        }
+        } 
     )
 }
 
 userSchema.methods.generateRefreshToken = function(){
     return jwt.sign(
         {
-            _id:this._id,
-            email:this.email,
-            username:this.username,
-            fullname:this.fullname
+            _id:this._id, // Refresh token has less info than access token
         },
         process.env.REFRESH_TOKEN_SECRET,
         {
